@@ -22,8 +22,8 @@ public class Controllers{
 	public ModelAndView footer(HttpServletRequest req,Model m) {
 		return new ModelAndView("footer");
 	}
-	@RequestMapping("/loginAction")
-	public ModelAndView LoginAction(HttpServletRequest req,Model m) throws ClassNotFoundException, SQLException {
+	@RequestMapping("loginAction")
+	public void LoginAction(HttpServletRequest req,Model m,HttpServletResponse res) throws ClassNotFoundException, SQLException, IOException {
 		String url="jdbc:mysql://localhost:3306/mahek?useUnicode=yes&characterEncoding=UTF-8";
 		String uname="root";
 		String pass="Sumo@123";
@@ -36,7 +36,7 @@ public class Controllers{
 		ResultSet rs=st.executeQuery(sql);
 		if(rs.next()==false){
 		m.addAttribute("message","You are not registered");
-		return new ModelAndView("Login");
+		res.sendRedirect("http://localhost:8080/Hosting/login");
 		}
 		else {
 			String fromdbuname=rs.getString(1);
@@ -46,13 +46,13 @@ public class Controllers{
 			HttpSession session=req.getSession(true);
 			session.setAttribute("name",username);
 			m.addAttribute("message","You are logged in now");
-			return new ModelAndView("/dashboard");
+			res.sendRedirect("http://localhost:8080/Hosting/dashboard");
 	    }
 	   }
 	  }
-		return new ModelAndView("Login");
-     }
-	@RequestMapping("/dashboard")
+
+	}
+	@RequestMapping("dashboard")
 	public ModelAndView Dashboard(HttpServletRequest res,Model m) throws ClassNotFoundException, SQLException {
 		HttpSession session=res.getSession(true);
 		String user=(String)session.getAttribute("name");
