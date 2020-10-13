@@ -47,7 +47,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li class="menu__item"><a href="userfiles.jsp" class="menu__link">Your Files</a></li>
 							<li class="menu__item"><a href="contact.jsp" class="menu__link">Contact US</a></li>
                             <li class="menu__item"><a href="dashboard.jsp" class="menu__link">Dashboard</a></li>
-                            <li class="menu__item"><a href="logout.jsp" class="menu__link">Log Out</a></li>
+                            <li class="menu__item"><a href="logout" class="menu__link">Log Out</a></li>
 						</ul>
 					</nav>
 				</div>

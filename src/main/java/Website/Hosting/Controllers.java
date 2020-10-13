@@ -53,7 +53,8 @@ public class Controllers{
 
 	}
 	@RequestMapping("dashboard")
-	public ModelAndView Dashboard(HttpServletRequest res,Model m) throws ClassNotFoundException, SQLException {
+	public ModelAndView Dashboard(HttpServletRequest res,HttpServletResponse req,Model m) throws IOException{
+		try {
 		HttpSession session=res.getSession(true);
 		String user=(String)session.getAttribute("name");
 		String url="jdbc:mysql://localhost:3306/mahek";
@@ -67,6 +68,10 @@ public class Controllers{
 		rs.next();
 		m.addAttribute("user",user);
 		m.addAttribute("git",rs.getString(1));
+		}
+		catch(Exception e) {
+			req.sendRedirect("http://localhost:8080/Hosting/login");
+		}
 		return new ModelAndView("dashboard");
 	}
 	@RequestMapping("after_login_header")
@@ -80,5 +85,17 @@ public class Controllers{
 		public ModelAndView passwordReset(HttpServletRequest req,Model m) {
 			return new ModelAndView("password_reset");
 		}
+	@RequestMapping("/logout")
+	public void Logout(HttpServletRequest req,HttpServletResponse res) throws IOException {
+		HttpSession session=req.getSession(true);
+		String name=(String)session.getAttribute("name");
+		if(name==null){
+		res.sendRedirect("http://localhost:8080/Hosting");
+		}else{
+		session.setAttribute("name",null);
+		res.sendRedirect("http://localhost:8080/Hosting/login");
+	}
+	}
+	
 	}
 
