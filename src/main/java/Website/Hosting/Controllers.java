@@ -13,7 +13,45 @@ public class Controllers{
 	@RequestMapping("/login")
 	public ModelAndView Index(HttpServletRequest req,Model m) {
 		return new ModelAndView("Login");
-	} 
+	}
+	
+	@RequestMapping("/register")
+	public ModelAndView register(HttpServletRequest req,Model m) {
+		return new ModelAndView("Register");
+	}
+	@RequestMapping("/Register")
+	public void Register(HttpServletRequest request,Model m,HttpServletResponse res) {
+		try{
+			String url="jdbc:mysql://localhost:3306/mahek?useUnicode=yes&characterEncoding=UTF-8";
+			String uname="root";
+			String pass="Sumo@123";
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con =DriverManager.getConnection(url,uname,pass);
+			String firstname=request.getParameter("fname");
+			String lastname=request.getParameter("lname");
+			String secq=request.getParameter("secq");
+			String seca=request.getParameter("seca");
+			String email=request.getParameter("email");
+			String userpassword=request.getParameter("password");
+			String what=request.getParameter("what");
+			String git=request.getParameter("git");
+			String why=request.getParameter("why");
+			PreparedStatement ps=con.prepareStatement("insert into register values(?,?,?,?,?,?,?,?,?,?)");
+			ps.setInt(1,0);
+			ps.setString(2,firstname);
+			ps.setString(3,lastname);
+			ps.setString(4,secq);
+			ps.setString(5,seca);
+			ps.setString(6,email);
+			ps.setString(7,userpassword);
+			ps.setString(8,what);
+			ps.setString(9,git);
+			ps.setString(10,why);
+			int k=ps.executeUpdate();
+			res.sendRedirect("http://localhost:8080/Hosting/login");
+		}
+		catch(Exception e){}
+		}
 	@RequestMapping("/header")
 	public ModelAndView header(HttpServletRequest req,Model m) {
 		return new ModelAndView("header");
@@ -48,7 +86,13 @@ public class Controllers{
 			m.addAttribute("message","You are logged in now");
 			res.sendRedirect("http://localhost:8080/Hosting/dashboard");
 	    }
+			else {
+			res.sendRedirect("http://localhost:8080/Hosting/login");
+			}
 	   }
+			else {
+				res.sendRedirect("http://localhost:8080/Hosting/login");
+			}
 	  }
 
 	}

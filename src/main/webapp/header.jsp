@@ -41,7 +41,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<nav class="menu menu--iris">
 						<ul class="nav navbar-nav menu__list">
 							<li class="menu__item menu__item--current"><a href="index.jsp" class="menu__link">Home</a></li>
-                            <li class="menu__item"><a href="register.jsp" class="menu__link">Register</a></li>
+                            <li class="menu__item"><a href="register" class="menu__link">Register</a></li>
 							<li class="menu__item"><a href="login" class="menu__link">Login</a></li>
 						</ul>
 					</nav>
